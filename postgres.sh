@@ -1,5 +1,4 @@
 docker run -d \
-    --name postgres \
     -e POSTGRES_USER=postgres \
     -e POSTGRES_PASSWORD=password \
     -e POSTGRES_DB=svc \

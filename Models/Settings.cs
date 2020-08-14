@@ -18,6 +18,6 @@ namespace NullJsonTest.Models
         public string? Value { get; set; }
 
         [Column("type_id")]
-        public int TypeId { get; set; }
+        public int Type_id { get; set; }
     }
 }

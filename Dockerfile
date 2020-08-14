@@ -4,15 +4,15 @@ WORKDIR /
 
 # copy csproj and restore as distinct layers
 COPY *.csproj ./
-COPY . ./
-RUN dotnet restore
+RUN dotnet restore -r linux-arm64
 
 # copy everything else and build app
+COPY . ./
 WORKDIR /
-RUN dotnet publish -c release -o /app --no-restore
+RUN dotnet publish -c release -o /app -r linux-arm64 --self-contained false --no-restore
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim-arm64v8
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "NullJsonTest.dll"]
+ENTRYPOINT ["./NullJsonTest"]

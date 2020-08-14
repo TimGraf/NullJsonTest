@@ -35,7 +35,7 @@ namespace NullJsonTest.Repositories
         public int CreateSetting(Settings setting)
         {
             string sql = "insert into settings(id, category, name, value, type_id) values(@id, @category, @name, @value, @type_id);";
-            var rows = this._connection.Execute(sql, new {id = setting.Id, category = setting.Category, name = setting.Name, value = setting.Value, type_id = setting.TypeId});
+            var rows = this._connection.Execute(sql, new {id = setting.Id, category = setting.Category, name = setting.Name, value = setting.Value, type_id = setting.Type_id});
 
             this._logger.LogInformation($"Affected rows {rows}");
 
