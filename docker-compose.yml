@@ -1,9 +1,5 @@
 version: "3.4"
 
-networks:
-    api-dev:
-        driver: bridge
-
 services:
     api: 
         image: api:latest
@@ -13,9 +9,7 @@ services:
             context: .
             dockerfile: Dockerfile
         ports:
-            - "5000:5000"
-        environment:
-            DB_CONECTION_STRING: "host=db;port=5432;database=svc;username=postgres;password=password"
+            - "80:80"
         networks:
             - api-dev
 
@@ -25,8 +19,8 @@ services:
             - "5432:5432"
         restart: always
         volumes:
-            - db_volume:/var/lib/postgresql/data
-            - ./dbscripts/seed.sql :/docker-entrypoint-initdb.d/seed.sql
+            - ./dbscripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+            - ./db_volume:/var/lib/postgresql/data
         environment:
             POSTGRES_USER: "postgres"
             POSTGRES_PASSWORD: "password"
@@ -36,3 +30,7 @@ services:
 
 volumes:
     db_volume:
+
+networks:
+    api-dev:
+        driver: bridge

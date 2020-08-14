@@ -29,7 +29,7 @@ namespace NullJsonTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection("host=localhost;port=5432;database=svc;username=postgres;password=password"));
+            services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection("host=db;port=5432;database=svc;username=postgres;password=password"));
             services.AddTransient<ISettingsRepository, SettingsRepository>();
         }
 
